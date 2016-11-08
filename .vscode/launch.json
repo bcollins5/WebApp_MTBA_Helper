@@ -64,7 +64,7 @@
             "request": "launch",
             "stopOnEntry": true,
             "pythonPath": "${config.python.pythonPath}",
-            "program": "${workspaceRoot}/run.py",
+            "program": "${workspaceRoot}/hello.py",
             "args": [],
             "debugOptions": [
                 "WaitOnAbnormalExit",

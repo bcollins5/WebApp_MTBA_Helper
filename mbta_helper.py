@@ -36,7 +36,11 @@ def get_lat_long(place_name):
     See https://developers.google.com/maps/documentation/geocoding/
     for Google Maps Geocode API URL formatting requirements.
     """
-    pass
+    url = GMAPS_BASE_URL + '?address=' + place_name
+    place_json = get_json(url)
+    lat = place_json['results'][0]['geometry']['location']['lat']
+    lon = place_json['results'][0]['geometry']['location']['lng']
+    return (lat, lon)
 
 
 def get_nearest_station(latitude, longitude):
@@ -58,6 +62,12 @@ def find_stop_near(place_name):
 
 
 def main():
-    place = 'Prudential%20Tower'
-    url = GMAPS_BASE_URL + '?address=' + place
+    place = input()
+    # url = GMAPS_BASE_URL + '?address=' + place
+    # pprint(get_json(url))
+
+    # print(find_stop_near(place_name))
+    print(get_lat_long(place))
+if __name__ == '__main__':
+    main()
     
