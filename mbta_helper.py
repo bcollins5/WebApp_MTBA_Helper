@@ -1,5 +1,6 @@
 import urllib.request   # urlencode function
 import json
+
 from pprint import pprint
 
 
@@ -8,13 +9,16 @@ GMAPS_BASE_URL = "https://maps.googleapis.com/maps/api/geocode/json"
 MBTA_BASE_URL = "http://realtime.mbta.com/developer/api/v2/stopsbylocation"
 MBTA_DEMO_API_KEY = "wX9NwuHnZU2ToO7GmGR9uw"
 
-# url = "https://maps.googleapis.com/maps/api/geocode/json?address=231+Forest+Street,+Wellesley,+MA+02457,+USA&key=AIzaSyDA1865acKD_jP_65hIQ24lo1LmUjHiRHY"
+url = "https://maps.googleapis.com/maps/api/geocode/json?address=231+Forest+Street,+Wellesley,+MA+02457,+USA&key=AIzaSyDA1865acKD_jP_65hIQ24lo1LmUjHiRHY"
 
-# pprint(response_data)
+f = urllib.request.urlopen(url)
+response_text = f.read().decode('utf-8')
+response_data = json.loads(response_text)
 
-# print('\n')
-# print("Address: ")
-# print(response_data["results"][0]["formatted_address"])
+pprint(response_data)
+print('\n')
+print("Address: ")
+print(response_data["results"][0]["formatted_address"])
 
 # A little bit of scaffolding if you want to use it
 
