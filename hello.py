@@ -1,25 +1,25 @@
 """
 Simple "Hello, World" application using Flask
 """
-from mbta_helper import *
-
-from flask import Flask
+from flask import Flask, render_template, request, redirect, url_for
+import math
+from mbta_helper import find_stop_near
 
 app = Flask(__name__)
 
 app.config['DEBUG'] = True
 
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
-
-@app.route('/find')
+@app.route('/',methods=['GET','POST'])
 def find_stop():
-    place_name = 'Babson College'
-    url = GMAPS_BASE_URL + '?address=' + place
-    return get_json(url)
+    if request.method == 'POST':
+        place = request.form['userloc']
+        stop, distance = find_stop_near(place)
+        print(stop)
+        print(distance)
+        return render_template('results.htm', stop = stop, distance=distance)
+    return render_template('index.htm')
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host ='127.0.0.1', port=5000)
